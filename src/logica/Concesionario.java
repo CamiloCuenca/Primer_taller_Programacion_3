@@ -21,7 +21,9 @@ public class Concesionario {
 
     private static double ganancia_total = 0;
 
-
+    /**
+     * Esta función muestra el menú y ejecuta las acciones correspondientes a cada una de las opciones disponibles.
+     */
     public static void Menu (){
         Scanner scanner = new Scanner(System.in);
         int opcion;
@@ -44,7 +46,7 @@ public class Concesionario {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Has seleccionado la Opción 3.");
+
 
                     String tipoVehiculoMensaje = "Selecciona el tipo de vehículo:\n" +
                             "1. Auto\n" +
@@ -157,18 +159,18 @@ public class Concesionario {
                     mostrarVehiculos(camiones);
                     break;
                 case 4:
-                    System.out.println("Has seleccionado la Opción 4.");
+
                     String placasVehiculo = JOptionPane.showInputDialog("Ingrese la placa a buscar para vender el vehiculo");
                     venderVehiculo(autos,placasVehiculo,vehiculosVendidos);
                     break;
                 case 5:
-                    System.out.println("Has seleccionado la Opción 5.");
+
                     int total = autos.size()+motos.size()+camiones.size();
                     JOptionPane.showMessageDialog(null , "El total de vehiculos disponibles es: " + total);
 
                     break;
                 case 6:
-                    System.out.println("Has seleccionado la Opción 6.");
+
                     int opcionEditar = Integer.parseInt(JOptionPane.showInputDialog("Selecciona el tipo de vehículo:\n" +
                             "1. Auto\n" +
                             "2. Moto\n" +
@@ -193,11 +195,11 @@ public class Concesionario {
 
                     break;
                 case 7:
-                    System.out.println("Has seleccionado la Opción 7.");
+
                     JOptionPane.showMessageDialog(null , "La ventas totales son: "+vehiculosVendidos.size() + "\nLa ganasia total es: " + ganancia_total);
                     break;
                 case 8:
-                    System.out.println("Has seleccionado la Opcion 8. ");
+
                     String placasEliminar = JOptionPane.showInputDialog("Ingrese la placa a buscar para eliminar el vehiculo ");
                     eliminarVehiculo(autos,placasEliminar);
                     eliminarVehiculo(motos,placasEliminar);
@@ -215,6 +217,13 @@ public class Concesionario {
         scanner.close();
     }
 
+    /**
+     * Esta función busca un vehículo en la lista mediante su número de placa.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda.
+     * @param numPlacas el número de placa del vehículo que se está buscando.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
     private static <A extends Vehiculo> void buscarVehiculoPlaca(List<A> lista, String numPlacas) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getPlaca().equals(numPlacas)) {
@@ -226,6 +235,13 @@ public class Concesionario {
         System.out.println("Vehículo no encontrado con placas: " + numPlacas);
     }
 
+    /**
+     * Esta función busca un vehículo en la lista mediante su marca.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda.
+     * @param marca La marca del vehículo que se está buscando.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
     private static <A extends Vehiculo> void buscarVehiculoMarca(List<A> lista, String marca) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getMarca().equals(marca)) {
@@ -237,6 +253,13 @@ public class Concesionario {
 
     }
 
+    /**
+     * Esta función busca un vehículo en la lista mediante su modelo.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda.
+     * @param modelo El modelo del vehículo que se esta buscando.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
     private static <A extends Vehiculo> void buscarVehiculoModelo(List<A> lista, String modelo) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getModelo().equals(modelo)) {
@@ -248,6 +271,13 @@ public class Concesionario {
 
     }
 
+    /**
+     * Esta función busca un vehículo en la lista mediante su referencia.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda.
+     * @param referencia La referencia del vehículo que se esta buscando.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
     private static <A extends Vehiculo> void buscarVehiculoReferencia(List<A> lista, String referencia) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getReferencia().equals(referencia)) {
@@ -259,6 +289,13 @@ public class Concesionario {
         System.out.println("Vehículo no encontrado " + referencia);
     }
 
+    /**
+     * Esta función busca un vehículo en la lista mediante su precio.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda.
+     * @param precio EL precio del vehículo que se esta buscando.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
     private static <A extends Vehiculo> void buscarVehiculoPrecio(List<A> lista, double precio) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getPrecio()==precio) {
@@ -270,9 +307,17 @@ public class Concesionario {
 
     }
 
-    private static <A extends Vehiculo> void venderVehiculo(List<A> lista , String numPlacas,List<Vehiculo> listaVendidos){
+    /**
+     * Esta función realiza la venta de un vehículo, identificándolo a través de su número de placa.
+     *
+     * @param lista La lista de vehículos en la que se realizará la búsqueda y venta.
+     * @param num_placa El número de placa del vehículo que se va a vender.
+     * @param listaVendidos La lista donde se registrarán los vehículos vendidos.
+     * @param <A> Tipo genérico de la lista de vehículos.
+     */
+    private static <A extends Vehiculo> void venderVehiculo(List<A> lista , String num_placa,List<Vehiculo> listaVendidos){
         for(Vehiculo vehiculo:lista) {
-            if (vehiculo.getPlaca().equals(numPlacas)) {
+            if (vehiculo.getPlaca().equals(num_placa)) {
                 listaVendidos.add(vehiculo);
                 lista.remove(vehiculo);
                 ganancia_total+=vehiculo.getPrecio();
@@ -281,11 +326,17 @@ public class Concesionario {
                 return;
             }
 
-            System.out.println("Vehículo no encontrado con placas: " + numPlacas);
+            System.out.println("Vehículo no encontrado con placas: " + num_placa);
 
         }
     }
-
+    
+    /**
+     * Esta función permite la modificación de los atributos de un automóvil, identificándolo mediante su número de placa.
+     * 
+     * @param lista La lista de vehículos en la que se realizará la búsqueda y posterior edición del vehículo.
+     * @param num_placa El número de placa del vehículo que se va a modificar.
+     */
     private static  void editarAuto(List<Auto> lista , String num_placa){
         for(Auto auto :lista){
             if(auto.getPlaca().equals(num_placa)){
@@ -317,7 +368,13 @@ public class Concesionario {
             }
         }
     }
-
+    
+    /**
+     * Esta función permite la modificación de los atributos de una motocicleta, identificándolo mediante su número de placa.
+     * 
+     * @param lista La lista de vehículos en la que se realizará la búsqueda y posterior edición del vehículo.
+     * @param num_placa El número de placa del vehículo que se va a modificar.
+     */
     private static void editarMoto(List<Moto> lista , String num_placa){
         for(Moto  moto :lista){
             if(moto.getPlaca().equals(num_placa)) {
@@ -343,7 +400,12 @@ public class Concesionario {
             }
         }
     }
-
+    
+    /**
+     * Esta función permite la modificación de los atributos de un Camion, identificándolo mediante su número de placa.
+     * @param lista La lista de vehículos en la que se realizará la búsqueda y posterior edición del vehículo.
+     * @param num_placa El número de placa del vehículo que se va a modificar.
+     */
     private static void editarCamion(List<Camion> lista , String num_placa){
 
         for(Camion  camion :lista){
@@ -369,19 +431,33 @@ public class Concesionario {
 
     }
 
-    private static <A extends Vehiculo> void  eliminarVehiculo (List<A> lista , String numPlacas){
+    /**
+     * Esta función realiza la eliminacion de un vehiculo, identificandolo mediante su número de placa
+     * 
+     * @param lista La lista de vehículos en la que se realizará la búsqueda y posterior eliminación del vehículo.
+     * @param num_placas El número de placa del vehiculo  que se va a eliminar.
+     * @param <A>  Tipo genérico de la lista de vehículos.
+     */
+    private static <A extends Vehiculo> void  eliminarVehiculo (List<A> lista , String num_placas){
         for(Vehiculo vehiculo:lista) {
-            if (vehiculo.getPlaca().equals(numPlacas)) {
+            if (vehiculo.getPlaca().equals(num_placas)) {
                 lista.remove(vehiculo);
 
                 System.out.println("¡Vehiculo eliminado con exito!");
                 return;
             }
-            System.out.println("Vehículo no encontrado con placas: " + numPlacas);
+            System.out.println("Vehículo no encontrado con placas: " + num_placas);
 
         }
     }
 
+    /** 
+     * Esta función realiza la accion de mostar todos los vehiculo disponibles .
+     * 
+     * @param lista La lista de vehículo.
+     * @param <x> Tipo genérico de la lista de vehículos.
+     */
+    
     private static <x extends Vehiculo> void mostrarVehiculos(List<x> lista) {
         for (Vehiculo vehiculo : lista) {
             System.out.println(vehiculo.getMarca()+" "+ vehiculo.getPlaca()+" "+vehiculo.getModelo());
