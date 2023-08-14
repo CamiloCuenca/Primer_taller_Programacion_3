@@ -7,14 +7,15 @@ public abstract class Vehiculo {
     private String referencia;
     private String modelo;
     private int num_ruedas;
+    private double precio;
 
-
-    public Vehiculo(String marca, String placa, String referencia, String modelo, int num_placa) {
+    public Vehiculo(String marca, String placa, String referencia, String modelo, int num_placa , double precio) {
         this.marca = marca;
         this.placa = placa;
         this.referencia = referencia;
         this.modelo = modelo;
         this.num_ruedas = num_placa;
+        this.precio=precio;
     }
 
 
@@ -62,7 +63,15 @@ public abstract class Vehiculo {
         this.num_ruedas = num_placa;
     }
 
-    public abstract void queSoy();
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public abstract void clacularPrecio();
 
 
 }

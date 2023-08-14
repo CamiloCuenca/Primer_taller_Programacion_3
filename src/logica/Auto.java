@@ -9,8 +9,8 @@ public class Auto extends Vehiculo{
 
     }
 
-    public Auto(String marca, String placa, String referencia, String modelo, int num_placa, int num_puertas, boolean is_gasolina) {
-        super(marca, placa, referencia, modelo, num_placa);
+    public Auto(String marca, String placa, String referencia, String modelo, int num_placa,  int num_puertas, boolean is_gasolina , double precio) {
+        super(marca, placa, referencia, modelo, num_placa , precio);
         this.num_puertas = num_puertas;
         this.is_gasolina = is_gasolina;
     }
@@ -32,8 +32,8 @@ public class Auto extends Vehiculo{
     }
 
     @Override
-    public void queSoy() {
-        System.out.println("Soy un auto");
+    public void clacularPrecio() {
+        System.out.println("El precio total esd de: " + getPrecio());
 
     }
 }

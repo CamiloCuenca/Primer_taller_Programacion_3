@@ -5,8 +5,8 @@ public class Camion extends Vehiculo{
 
 
 
-    public Camion(String marca, String placa, String referencia, String modelo, int num_placa, int cap_carga) {
-        super(marca, placa, referencia, modelo, num_placa);
+    public Camion(String marca, String placa, String referencia, String modelo, int num_placa, int cap_carga , double precio) {
+        super(marca, placa, referencia, modelo, num_placa , precio);
         this.cap_carga = cap_carga;
     }
 
@@ -14,7 +14,7 @@ public class Camion extends Vehiculo{
 
     }
     @Override
-    public void queSoy() {
+    public void clacularPrecio() {
         System.out.println("yo soy un camion");
 
     }

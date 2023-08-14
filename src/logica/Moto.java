@@ -5,8 +5,8 @@ public class Moto extends Vehiculo {
     private int cilindraje;
     private double tamano_tanque;
 
-    public Moto(String marca, String placa, String referencia, String modelo, int num_placa, int cilindraje, double tamano_tanque) {
-        super(marca, placa, referencia, modelo, num_placa);
+    public Moto(String marca, String placa, String referencia, String modelo, int num_placa, int cilindraje, double tamano_tanque , double precio) {
+        super(marca, placa, referencia, modelo, num_placa , precio);
         this.cilindraje = cilindraje;
         this.tamano_tanque = tamano_tanque;
     }
@@ -37,8 +37,8 @@ public class Moto extends Vehiculo {
     }
 
     @Override
-    public void queSoy() {
-        System.out.println("Sou una moto");
+    public void clacularPrecio() {
+        System.out.println("El precio total esd de: " + getPrecio());
 
     }
 }
