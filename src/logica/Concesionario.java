@@ -4,10 +4,8 @@ import javax.sound.midi.Soundbank;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Concesionario {
     private static double ganancia_total = 0;
-
     private static List<Vehiculo> vehiculos = new ArrayList<>();
     private static List<Vehiculo> VehiculosVendidos = new ArrayList<>();
 
@@ -16,7 +14,6 @@ public class Concesionario {
      * Esta función muestra el menú y ejecuta las acciones correspondientes a cada una de las opciones disponibles.
      */
     public static void Menu (){
-
         int opcion;
         do {
             String menuMensaje = "Menú:\n" +
@@ -32,7 +29,6 @@ public class Concesionario {
                     "Ingrese la opción:";
 
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null, menuMensaje));
-
             switch (opcion) {
                 case 1:
 
@@ -40,24 +36,25 @@ public class Concesionario {
                             "1. Auto\n" +
                             "2. Moto\n" +
                             "3. Camión";
-                    int tipoVehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, tipoVehiculoMensaje));
+                    int tipo_vehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, tipoVehiculoMensaje));
 
-                    switch (tipoVehiculo) {
+                    switch (tipo_vehiculo) {
                         case 1:
-                            registrarVehiculo(tipoVehiculo);
+                            registrarVehiculo(tipo_vehiculo);
                             System.out.println("Auto agregado al listado.");
                             break;
                         case 2:
-                            registrarVehiculo(tipoVehiculo);
+                            registrarVehiculo(tipo_vehiculo);
                             System.out.println("Moto agregada al listado.");
                             break;
                         case 3:
-                            registrarVehiculo(tipoVehiculo);
+                            registrarVehiculo(tipo_vehiculo);
                             System.out.println("Camión agregado al listado.");
                             break;
                         default:
                             System.out.println("Tipo de vehículo no válido.");
                     }
+
                     break;
 
                 case 2:
@@ -93,14 +90,14 @@ public class Concesionario {
                     break;
                 case 3:
                     System.out.println("Vehículos en la lista :");
-                    int opcionMostrar=Integer.parseInt(JOptionPane.showInputDialog("Ingrese que tipo de Vehiculo quiere ver" +"\n1. Auto" +"\n2. Moto" + "\n3. Camion"));
-                    mostrarVehiculos(vehiculos , opcionMostrar);
+                    int opcion_mostrar=Integer.parseInt(JOptionPane.showInputDialog("Ingrese que tipo de Vehiculo quiere ver" +"\n1. Auto" +"\n2. Moto" + "\n3. Camion"));
+                    mostrarVehiculos(vehiculos , opcion_mostrar);
 
                     break;
                 case 4:
-                    int opcionVender=Integer.parseInt(JOptionPane.showInputDialog("Ingrese que tipo de Vehiculo quiere vender" +"\n1. Auto" +"\n2. Moto" + "\n3. Camion"));
+                    int opcion_vender=Integer.parseInt(JOptionPane.showInputDialog("Ingrese que tipo de Vehiculo quiere vender" +"\n1. Auto" +"\n2. Moto" + "\n3. Camion"));
                     String placasVehiculo = JOptionPane.showInputDialog("Ingrese la placa a buscar para vender el vehiculo");
-                    venderVehiculo(vehiculos,placasVehiculo,VehiculosVendidos,opcionVender);
+                    venderVehiculo(vehiculos,placasVehiculo,VehiculosVendidos,opcion_vender);
                     break;
                 case 5:
                     JOptionPane.showMessageDialog(null , "El total de vehiculos disponibles es: " + vehiculos.size());
@@ -112,13 +109,12 @@ public class Concesionario {
 
                     break;
                 case 7:
-
                     JOptionPane.showMessageDialog(null , "La ventas totales son: "+VehiculosVendidos.size() + "\nLa ganasia total es: " + ganancia_total);
                     break;
                 case 8:
 
-                    String placasEliminar = JOptionPane.showInputDialog("Ingrese la placa a buscar para eliminar el vehiculo ");
-                    eliminarVehiculo(vehiculos,placasEliminar);
+                    String placas_eliminar = JOptionPane.showInputDialog("Ingrese la placa a buscar para eliminar el vehiculo ");
+                    eliminarVehiculo(vehiculos,placas_eliminar);
                     break;
 
                 case 9:
@@ -131,6 +127,11 @@ public class Concesionario {
 
     }
 
+    /**
+     * Esta función registra un vehiculo (Auto, Moto, Camion) , en un ArrayList.
+     *
+     * @param opcion
+     */
     public static void registrarVehiculo(int opcion){
         String marca = JOptionPane.showInputDialog("Ingrese la marca");
         String placa =  JOptionPane.showInputDialog("Ingrese la placa");
@@ -188,13 +189,11 @@ public class Concesionario {
      *
      * @param lista La lista de vehículos en la que se realizará la búsqueda.
      * @param marca La marca del vehículo que se está buscando.
-     * @param <A> Tipo genérico de la lista de vehículos.
      */
-    private static <A extends Vehiculo> void buscarVehiculoMarca(List<A> lista, String marca) {
+    private static  void buscarVehiculoMarca(List<Vehiculo> lista, String marca) {
         for (Vehiculo vehiculo : lista) {
             if (vehiculo.getMarca().equals(marca)) {
                 System.out.println("Vehículo encontrado: " + vehiculo.getMarca() + " "+ vehiculo.getModelo() + " "+ vehiculo.getReferencia()+ " "+ vehiculo.getPrecio());
-
 
             }
         }
@@ -306,14 +305,11 @@ public class Concesionario {
                     break;
             }
 
-
-
-
         }
     }
     
     /**
-     * Esta función permite la modificación de los atributos de un automóvil, identificándolo mediante su número de placa.
+     * Esta función permite la modificación de los atributos de un vehiculo, identificándolo mediante su número de placa.
      * 
      * @param lista La lista de vehículos en la que se realizará la búsqueda y posterior edición del vehículo.
      * @param num_placa El número de placa del vehículo que se va a modificar.
@@ -328,6 +324,7 @@ public class Concesionario {
                  String referencia =  JOptionPane.showInputDialog("Ingrese la referencia" , vehiculo.getReferencia());
                  String modelo =  JOptionPane.showInputDialog("Ingrese el modelo" , vehiculo.getModelo());
                  int num_ruedas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de ruedas" , vehiculo.getNum_ruedas()));
+                 double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el nuevo precio",vehiculo.getPrecio()));
 
                  if(vehiculo instanceof Auto){
                     Auto auto = (Auto) vehiculo;
@@ -359,6 +356,7 @@ public class Concesionario {
                  vehiculo.setReferencia(referencia);
                  vehiculo.setModelo(modelo);
                  vehiculo.setNum_ruedas(num_ruedas);
+                 vehiculo.setPrecio(precio);
 
                  JOptionPane.showMessageDialog(null , "¡La edicion se completo con exito!");
 

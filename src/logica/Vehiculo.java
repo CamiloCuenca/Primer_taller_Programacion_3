@@ -9,6 +9,16 @@ public abstract class Vehiculo {
     private int num_ruedas;
     private double precio;
 
+    /**
+     * Constructor de la clase vehiculo.
+     *
+     * @param marca
+     * @param placa
+     * @param referencia
+     * @param modelo
+     * @param num_placa
+     * @param precio
+     */
     public Vehiculo(String marca, String placa, String referencia, String modelo, int num_placa , double precio) {
         this.marca = marca;
         this.placa = placa;
@@ -18,7 +28,9 @@ public abstract class Vehiculo {
         this.precio=precio;
     }
 
-
+    /**
+     * Constructor vacio.
+     */
     public Vehiculo() {
 
     }
@@ -72,15 +84,19 @@ public abstract class Vehiculo {
     }
 
 
+    /**
+     * Método que retorna los datos de la clase vehiculo.
+     * @return
+     */
     @Override
     public String toString() {
         
         return
-                "marca='" + marca +
-                ", placa='" + placa  +
-                ", referencia='" + referencia +
-                ", modelo='" + modelo  +
-                ", númmero de ruedas=" + num_ruedas +
-                ", precio=" + precio ;
+                "marca= " + marca +
+                " placa= " + placa  +
+                " referencia= " + referencia +
+                " modelo= " + modelo  +
+                " númmero de ruedas= " + num_ruedas +
+                " precio= " + precio ;
     }
 }
