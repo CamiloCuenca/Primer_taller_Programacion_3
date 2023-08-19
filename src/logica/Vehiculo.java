@@ -71,7 +71,16 @@ public abstract class Vehiculo {
         this.precio = precio;
     }
 
-    public abstract void clacularPrecio();
 
-
+    @Override
+    public String toString() {
+        
+        return
+                "marca='" + marca +
+                ", placa='" + placa  +
+                ", referencia='" + referencia +
+                ", modelo='" + modelo  +
+                ", númmero de ruedas=" + num_ruedas +
+                ", precio=" + precio ;
+    }
 }

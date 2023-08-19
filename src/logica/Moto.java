@@ -36,9 +36,12 @@ public class Moto extends Vehiculo {
         this.tamano_tanque = tamano_tanque;
     }
 
-    @Override
-    public void clacularPrecio() {
-        System.out.println("El precio total esd de: " + getPrecio());
 
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "cilindraje=" + cilindraje +
+                ",tamaño del tanque=" + tamano_tanque ;
     }
 }

@@ -13,17 +13,17 @@ public class Camion extends Vehiculo{
     public Camion() {
 
     }
-    @Override
-    public void clacularPrecio() {
-        System.out.println("yo soy un camion");
-
-    }
-
     public int getCap_carga() {
         return cap_carga;
     }
 
     public void setCap_carga(int cap_carga) {
         this.cap_carga = cap_carga;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "capacidad de carga=" + cap_carga;
     }
 }

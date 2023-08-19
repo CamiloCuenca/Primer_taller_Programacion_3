@@ -23,7 +23,7 @@ public class Auto extends Vehiculo{
         this.num_puertas = num_puertas;
     }
 
-    public boolean isIs_gasolina() {
+    public boolean getIs_gasolina() {
         return is_gasolina;
     }
 
@@ -31,9 +31,18 @@ public class Auto extends Vehiculo{
         this.is_gasolina = is_gasolina;
     }
 
-    @Override
-    public void clacularPrecio() {
-        System.out.println("El precio total esd de: " + getPrecio());
 
+    @Override
+    public String toString() {
+        
+        String gosolina = null;
+        if(is_gasolina){
+            gosolina = "si";
+        } else if (!is_gasolina) {
+            gosolina="no";
+        }
+        return super.toString()+
+                "número puertas= " + num_puertas +
+                "Usa gasolina= " + gosolina ;
     }
 }
