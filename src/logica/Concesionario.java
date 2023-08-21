@@ -8,6 +8,7 @@ public class Concesionario {
     private static double ganancia_total = 0;
     private static List<Vehiculo> vehiculos = new ArrayList<>();
     private static List<Vehiculo> VehiculosVendidos = new ArrayList<>();
+    private static boolean entradaValida = false;
 
 
     /**
@@ -132,34 +133,77 @@ public class Concesionario {
      *
      * @param opcion
      */
-    public static void registrarVehiculo(int opcion){
+    public static void registrarVehiculo(int opcion) {
         String marca = JOptionPane.showInputDialog("Ingrese la marca");
-        String placa =  JOptionPane.showInputDialog("Ingrese la placa");
-        String referencia =  JOptionPane.showInputDialog("Ingrese la referencia" );
-        String modelo =  JOptionPane.showInputDialog("Ingrese el modelo" );
-        int num_ruedas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de ruedas"));
-        double precio= Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del vehiculo: "));
+        String placa = JOptionPane.showInputDialog("Ingrese la placa");
+        String referencia = JOptionPane.showInputDialog("Ingrese la referencia");
+        String modelo = JOptionPane.showInputDialog("Ingrese el modelo");
+        int num_ruedas =0;
 
-
-        if(opcion==1){
-            int num_puertas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de puertas"));
-            String is_gasolina = JOptionPane.showInputDialog("¿El auto usa gasolina?" +"\n(si , no)");
-            boolean gasolina = false;
-            if(is_gasolina.toLowerCase().equals("si")){
-                gasolina = true;
-            }else if (is_gasolina.toLowerCase().equals("no")){
-                gasolina= false;
+        do {
+            try {
+                num_ruedas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de ruedas"));
+                entradaValida=true;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número no una letra");
             }
-            vehiculos.add(new Auto(marca,placa,referencia,modelo,num_ruedas,num_puertas,gasolina,precio));
+        }while (!entradaValida);
 
-        }else if(opcion==2){
-            int cilindraje_moto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cilindraje"));
-            double tamano_tanque = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el tamaño del tanque"));
+        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del vehiculo: "));
 
-            vehiculos.add(new Moto(marca,placa,referencia,modelo,num_ruedas,cilindraje_moto,tamano_tanque,precio));
-        } else if (opcion ==3) {
-            int  cap_carga = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de carga"));
-            vehiculos.add(new Camion(marca,placa,referencia,modelo,num_ruedas,cap_carga,precio));
+
+        if (opcion == 1) {
+            entradaValida = false;
+            String is_gasolina = JOptionPane.showInputDialog("¿El auto usa gasolina?" + "\n(si , no)");
+            boolean gasolina = false;
+            if (is_gasolina.toLowerCase().equals("si")) {
+                gasolina = true;
+            } else if (is_gasolina.toLowerCase().equals("no")) {
+                gasolina = false;
+            }
+            int num_puertas = 0;
+            do {
+                try {
+                    num_puertas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de puertas"));
+                    entradaValida = true; // Si no se lanza excepción, la entrada es válida y el bucle se detendrá
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Error: Ingresa un número válido de puertas.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                    // Aquí puedes manejar la excepción de acuerdo a tus necesidades, como mostrar un mensaje de error o realizar otra acción.
+                }
+            } while (!entradaValida);
+
+            vehiculos.add(new Auto(marca, placa, referencia, modelo, num_ruedas, num_puertas, gasolina, precio));
+
+        } else if (opcion == 2) {
+            int cilindraje_moto = 0;
+            double tamano_tanque = 0.0;
+            entradaValida = false;
+
+            do {
+                try {
+                    cilindraje_moto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cilindraje"));
+                    tamano_tanque = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el tamaño del tanque"));
+                    entradaValida = true; // Si no se lanza excepción, la entrada es válida y el bucle se detendrá
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Error: Ingresa valores numéricos válidos.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                    // Aquí puedes manejar la excepción de acuerdo a tus necesidades, como mostrar un mensaje de error o realizar otra acción.
+                }
+            } while (!entradaValida);
+            vehiculos.add(new Moto(marca, placa, referencia, modelo, num_ruedas, cilindraje_moto, tamano_tanque, precio));
+        } else if (opcion == 3) {
+            int cap_carga =0;
+            entradaValida = false;
+            do {
+                try {
+                    cap_carga = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de carga"));
+                    entradaValida=true;
+                }catch (NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Error: Ingresa valores numéricos válidos.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                }
+            }while (!entradaValida);
+
+
+            vehiculos.add(new Camion(marca, placa, referencia, modelo, num_ruedas, cap_carga, precio));
 
         }
 
@@ -323,13 +367,41 @@ public class Concesionario {
                  String placa =  JOptionPane.showInputDialog("Ingrese la placa", vehiculo.getPlaca());
                  String referencia =  JOptionPane.showInputDialog("Ingrese la referencia" , vehiculo.getReferencia());
                  String modelo =  JOptionPane.showInputDialog("Ingrese el modelo" , vehiculo.getModelo());
-                 int num_ruedas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de ruedas" , vehiculo.getNum_ruedas()));
+                int num_ruedas =0;
+
+                do {
+                    try {
+                        num_ruedas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de ruedas" , vehiculo.getNum_ruedas()));
+                        entradaValida=true;
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un número no una letra");
+                    }
+                }while (!entradaValida);
                  double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el nuevo precio",vehiculo.getPrecio()));
 
                  if(vehiculo instanceof Auto){
                     Auto auto = (Auto) vehiculo;
-                     int num_puertas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de puertas" , ((Auto) vehiculo).getNum_puertas()));
-                     String is_gasolina = JOptionPane.showInputDialog("¿El auto usa gasolina?" +"\n(si , no)");
+                     int num_puertas = 0;
+                     entradaValida = false;
+                     do {
+                         try {
+                             num_puertas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de puertas", ((Auto) vehiculo).getNum_puertas()));
+                             entradaValida = true; // Si no se lanza excepción, la entrada es válida y el bucle se detendrá
+                         } catch (NumberFormatException e) {
+                             JOptionPane.showMessageDialog(null, "Error: Ingresa un número válido de puertas.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                             // Aquí puedes manejar la excepción de acuerdo a tus necesidades, como mostrar un mensaje de error o realizar otra acción.
+                         }
+                     } while (!entradaValida);
+
+                     String aux ;
+                     if(((Auto) vehiculo).getIs_gasolina()){
+                         aux = "si";
+                     }else {
+                         aux="no";
+                     }
+
+
+                     String is_gasolina = JOptionPane.showInputDialog("¿El auto usa gasolina?" +"\n(si , no)", aux);
                      boolean gasolina = false;
                      if(is_gasolina.toLowerCase().equals("si")){
                          gasolina = true;
@@ -341,13 +413,37 @@ public class Concesionario {
 
                  } else if (vehiculo instanceof Moto) {
                     Moto moto = (Moto) vehiculo;
-                    int cilindraje = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cilindraje",((Moto) vehiculo).getCilindraje()));
-                    double tamanio_tamque = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el tamaño del tanque", ((Moto) vehiculo).getTamano_tanque()) );
+                     int cilindraje = 0;
+                     double tamano_tanque = 0.0;
+                     entradaValida = false;
+                     do {
+                         try {
+                             cilindraje = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el cilindraje",((Moto) vehiculo).getCilindraje()));
+                             tamano_tanque = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el tamaño del tanque", ((Moto) vehiculo).getTamano_tanque()));
+                             entradaValida = true; // Si no se lanza excepción, la entrada es válida y el bucle se detendrá
+                         } catch (NumberFormatException e) {
+                             JOptionPane.showMessageDialog(null, "Error: Ingresa valores numéricos válidos.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                             // Aquí puedes manejar la excepción de acuerdo a tus necesidades, como mostrar un mensaje de error o realizar otra acción.
+                         }
+                     } while (!entradaValida);
+
+
                     ((Moto) vehiculo).setCilindraje(cilindraje);
-                    ((Moto) vehiculo).setTamano_tanque(tamanio_tamque);
+                    ((Moto) vehiculo).setTamano_tanque(tamano_tanque);
                  } else if (vehiculo instanceof Camion) {
                      Camion camion = (Camion) vehiculo;
-                     int cap_carga = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de carga: " , ((Camion) vehiculo).getCap_carga()));
+                     int cap_carga =0;
+                     entradaValida = false;
+                     do {
+                         try {
+                             cap_carga = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad de carga", ((Camion) vehiculo).getCap_carga()));
+                             entradaValida=true;
+                         }catch (NumberFormatException e){
+                             JOptionPane.showMessageDialog(null, "Error: Ingresa valores numéricos válidos.", "Error de entrada", JOptionPane.ERROR_MESSAGE);
+                         }
+                     }while (!entradaValida);
+
+
                      ((Camion) vehiculo).setCap_carga(cap_carga);
                  }
 
